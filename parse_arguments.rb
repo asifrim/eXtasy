@@ -7,7 +7,7 @@ class ParseArguments
 		options = OpenStruct.new
 
 		opts = OptionParser.new do |opts|
-			opts.banner = "Usage: extasy.rb [options]"
+			opts.banner = "Usage: extasy.rb -i <VCF_FILE> -g <GENEPRIO_FILE>"
 			
 			opts.on("-i", "--vcf <FILE>", "Input VCF file") do |v|
 				if !File.file?(v)

@@ -2,10 +2,8 @@
 require './parse_arguments.rb'
 require './vcf.rb'
 require './tabix.rb'
-require 'zlib'
 require './intersectbed.rb'
 require './config.rb'
-require './statistics.rb'
 require './endeavour.rb'
 
 
