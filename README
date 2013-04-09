@@ -1,0 +1,28 @@
+======================
++ eXtasy: USER MANUAL+
+======================
+
+Last updated: April 9th, 2013
+Author: Alejandro Sifrim
+Affiliation: Bioinformatics Group, Department of Electrical Engineering, University of Leuven
+Contact: alejandro.sifrim@esat.kuleuven.be
+
+
+For people who don't read manuals:
+==================================
+
+To install eXtasy:
+
+wget http://homes.esat.kuleuven.be/~bioiuser/eXtasy/current/eXtasy.tar.gz
+tar -vxzf eXtasy.tar.gz
+cd eXtasy
+./install.rb
+
+Example eXtasy run:
+
+./extasy.rb -i ~/data/example.vcf -g ./geneprios/res/HP_0000033_fgs.tsv 
+
+
+What is eXtasy?
+===============
+eXtasy is a pipeline for ranking nonsynonymous single nucleotide variants given a specific phenotype. It takes into account the putative deleteriousness of the variant, haploinsufficiency predictions of the underlying gene and the similarity of the given gene to known genes in the given phenotype.
