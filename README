@@ -8,21 +8,33 @@ Affiliation: Bioinformatics Group, Department of Electrical Engineering, Univers
 Contact: alejandro.sifrim@esat.kuleuven.be
 
 
-For people who don't read manuals:
-==================================
+Getting started:
+============
 
 To install eXtasy:
-
+------------------------
 wget http://homes.esat.kuleuven.be/~bioiuser/eXtasy/current/eXtasy.tar.gz
 tar -vxzf eXtasy.tar.gz
 cd eXtasy
 ./install.rb
 
-Example eXtasy run:
+This will download all the necessary files and unpack all the precomputed gene prioritizations which are needed as a second input in the next step.
 
+Example eXtasy run:
+-----------------------------
 ./extasy.rb -i ~/data/example.vcf -g ./geneprios/res/HP_0000033_fgs.tsv 
 
+The -i option takes as an argument the path to the vcf-file with the variants that you want to prioritize.
+The -g option takes an Endeavour gene prioritization file which can be found in the geneprios/res/ folder. A list of all precomputed phenotypes to choose from is available on the website (http://homes.esat.kuleuven.be/~bioiuser/eXtasy/current/hpo_terms.tsv). In upcoming versions custom gene prioritization based on a user-defined group of genes will be added.
+
+The output can be found in the same directory as the input vcf file. It will contain two eXtasy scores and all the features used to compute these scores. The eXtasy scores can be found in the last two columns. If no missing values were present for that file the complete random forest model was able to run and will return a score. If missing values were present a less complete model was run, omitting haploinsufficiency scores (as this is the most missing feature) and replacing any further missing values with the median of that feature. The complete model outperforms the imputed model in most cases. 
+ 
 
 What is eXtasy?
 ===============
-eXtasy is a pipeline for ranking nonsynonymous single nucleotide variants given a specific phenotype. It takes into account the putative deleteriousness of the variant, haploinsufficiency predictions of the underlying gene and the similarity of the given gene to known genes in the given phenotype.
+eXtasy is a pipeline for ranking nonsynonymous single nucleotide variants given a specific phenotype. It takes into account the putative deleteriousness of the variant, haploinsufficiency predictions of the underlying gene and the similarity of the given gene to known genes in the given phenotype. 
+
+
+ 
+
+
