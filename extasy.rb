@@ -27,9 +27,13 @@ annotated_file = Tabix.scan_matches_file(matches_file)
 extasy_input_file = Endeavour.append_gene_prioritizations(annotated_file, options.geneprio_file)
 extasy_output_file = Extasy.run_extasy(extasy_input_file)
 
-
-#Tabix.index_vcf_file(options.vcf_file)
-#Tabix.find_coverage_and_varfreq(options.vcf_file,extasy_output_file)
-
+prioname = File.basename(options.geneprio_file).split(".")[0]
+File.rename("#{options.vcf_file}.sorted.matches.annotated.extasy_input.extasy_output","#{options.vcf_file.gsub(/\.vcf$/,"")}_-_#{prioname}.extasy")
+File.delete(sorted_file)
+File.delete(matches_file)
+File.delete(annotated_file)
+File.delete(extasy_input_file)
+puts "#{Time.now}: Intermediate files deleted..."
+puts "#{Time.now}: DONE!"
 
 
