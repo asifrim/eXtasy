@@ -12,11 +12,28 @@ Contact: alejandro.sifrim@esat.kuleuven.be
 Getting started:
 ================
 
+Prerequisites:
+--------------
+- Ruby (tested on version 1.9.1)
+- Tabix
+- Bedtools
+- R Statistical Framework with randomForest and RobustRankAggreg libraries installed
+
 To install eXtasy:
 ------------------------
 wget http://homes.esat.kuleuven.be/~bioiuser/eXtasy/current/eXtasy.tar.gz
 tar -vxzf eXtasy.tar.gz
+
+OR (TO GET THE DEVELOPMENT VERSION)
+
+git clone https://github.com/asifrim/eXtasy.git
+
+THEN
+
 cd eXtasy
+
+CONFIGURE BY CHANGING config.rb AND THEN RUN
+
 ./install.rb
 
 This will download all the necessary files and unpack all the precomputed gene prioritizations which are needed as a second input in the next step.
