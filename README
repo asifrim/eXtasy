@@ -15,8 +15,8 @@ Getting started:
 Prerequisites:
 --------------
 - Ruby (tested on version 1.9.1)
-- Tabix
-- Bedtools
+- Tabix (tested on version 0.2.5)
+- Bedtools (tested on version 2.17.0)
 - R Statistical Framework with randomForest and RobustRankAggreg libraries installed
 
 To install eXtasy:
