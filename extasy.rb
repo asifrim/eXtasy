@@ -28,12 +28,18 @@ extasy_input_file = Endeavour.append_gene_prioritizations(annotated_file, option
 extasy_output_file = Extasy.run_extasy(extasy_input_file)
 
 prioname = File.basename(options.geneprio_file).split(".")[0]
-File.rename("#{options.vcf_file}.sorted.matches.annotated.extasy_input.extasy_output","#{options.vcf_file.gsub(/\.vcf$/,"")}_-_#{prioname}.extasy")
+newfilename = "#{options.vcf_file.gsub(/\.vcf$/,"")}_-_#{prioname}.extasy"
+File.rename("#{options.vcf_file}.sorted.matches.annotated.extasy_input.extasy_output",newfilename)
 File.delete(sorted_file)
 File.delete(matches_file)
 File.delete(annotated_file)
 File.delete(extasy_input_file)
 puts "#{Time.now}: Intermediate files deleted..."
+
+if options.zip == true
+	puts "#{Time.now}: Compressing the outputfile"
+	`gzip #{newfilename}`
+end
 puts "#{Time.now}: DONE!"
 
 

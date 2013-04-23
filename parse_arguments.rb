@@ -11,7 +11,7 @@ class ParseArguments
 			
 			opts.on("-i", "--vcf <FILE>", "Input VCF file") do |v|
 				if !File.file?(v)
-					putss "Error: Input VCF file could not be found!: #{v}"
+					puts "Error: Input VCF file could not be found!: #{v}"
 					puts opts 
 					exit
 				end
@@ -25,6 +25,10 @@ class ParseArguments
 					exit
 				end
 				options.geneprio_file = v
+			end
+
+			opts.on_tail("-z", "--zip", "Compress the output file") do 
+				options.zip = true
 			end
 
 			opts.on_tail("-h", "--help", "Show this message") do 
