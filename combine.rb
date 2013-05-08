@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require './config.rb'
+require File.expand_path('../config.rb', __FILE__)
 
 if ARGV == []
 	puts "=================================================================================================="

@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
-require './parse_arguments.rb'
-require './vcf.rb'
-require './tabix.rb'
-require './intersectbed.rb'
-require './config.rb'
-require './endeavour.rb'
+require  File.expand_path('../parse_arguments.rb', __FILE__)
+require  File.expand_path('../vcf.rb', __FILE__)
+require  File.expand_path('../tabix.rb', __FILE__)
+require  File.expand_path('../intersectbed.rb', __FILE__)
+require  File.expand_path('../config.rb', __FILE__)
+require  File.expand_path('../endeavour.rb', __FILE__)
 
 
 class Extasy

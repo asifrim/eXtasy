@@ -23,12 +23,12 @@ BEDTOOLS = "/users/sista/asifrim/bin/"
 ####################################################################
 
 # Location of the bed file containing all missense positions in variant annotation file
-POSITIONSFILE = "./input/positions.bed"
+POSITIONSFILE = File.expand_path('../input/positions.bed',__FILE__)
 # Location of variant_annotation_file.extasy.gz
-VARIANTSFILE = "./input/variant_annotation_file.extasy.gz"
+VARIANTSFILE = File.expand_path('../input/variant_annotation_file.extasy.gz', __FILE__)
 # Location of genes.extasy
-GENESFILE = "./input/genes.extasy"
+GENESFILE = File.expand_path('../input/genes.extasy',__FILE__)
 
 #Locations of random forest models
-COMPLETEMODEL = "./model/balanced_complete.model"
-INCOMPLETEMODEL = "./model/balanced_incomplete.model"
+COMPLETEMODEL = File.expand_path('../model/balanced_complete.model', __FILE__)
+INCOMPLETEMODEL = File.expand_path('../model/balanced_incomplete.model', __FILE__)
