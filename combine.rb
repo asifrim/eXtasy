@@ -32,7 +32,7 @@ file = File.open("#{combinefilename}.order_statistics_output")
 combinefile = File.open("#{combinefilename}")
 variantfile = File.open(ARGV[0])
 combined_scores = {}
-outputfile = File.open(File.basename(ARGV[0]).split("_-_")[0]+".combined.extasy",'w')
+outputfile = File.open(File.dirname(ARGV[0])+"/"+File.basename(ARGV[0]).split("_-_")[0]+".combined.extasy",'w')
 
 file.gets
 puts "#{Time.now}: Outputting combined prioritization..."
