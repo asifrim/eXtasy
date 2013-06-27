@@ -5,6 +5,15 @@ load(args[3]) #loads rfhaplo
 
 
 d <- read.table(args[1], header=TRUE, sep="\t")
+if(class(d$altbase) != "factor"){
+	d[d$altbase == TRUE,]$altbase = "T"
+	d$altbase <- as.factor(d$altbase)
+}
+if(class(d$refbase) != "factor"){
+	d[d$refbase == TRUE,]$refbase = "T"
+	d$refbase <- as.factor(d$refbase)
+}
+
 pcomplete <- predict(rf, d, type="prob")
 pincomplete <- predict(rfhaplo, na.roughfix(d), type="prob" )
 
