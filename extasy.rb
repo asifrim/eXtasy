@@ -11,7 +11,7 @@ class Extasy
 
 	def self.run_extasy(extasy_input_file)
 		puts "#{Time.now}: Running eXtasy..."
-		`#{RCOMMAND} --no-save --no-restore --args #{extasy_input_file} #{COMPLETEMODEL} #{INCOMPLETEMODEL} < run_extasy.r > /dev/null`
+		`#{RCOMMAND} --no-save --no-restore --args #{extasy_input_file} #{COMPLETEMODEL} #{INCOMPLETEMODEL} < #{File.expand_path('../run_extasy.r', __FILE__)} > /dev/null`
 		puts "#{Time.now}: eXtasy prioritization completed!"
 		return "#{extasy_input_file}.extasy_output"
 	end
