@@ -9,7 +9,7 @@ class	Intersectbed
 
 	def self.intersect_lines(sorted_vcf_file)
 		puts "#{Time.now}: Finding missense mutations..."
-		`#{BEDTOOLS}/intersectBed -wo -a #{sorted_vcf_file} -b #{POSITIONSFILE} -sorted > #{sorted_vcf_file}.matches`
+		`#{INTERSECTBED} -wo -a #{sorted_vcf_file} -b #{POSITIONSFILE} -sorted > #{sorted_vcf_file}.matches`
 		return sorted_vcf_file+".matches"
 	end
 end
