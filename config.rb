@@ -9,14 +9,14 @@
 #PREREQUISITES
 ##############
 
-#Path the R statistical environment. MAKE SURE TO INSTALL the "randomForest" package!!!
+#Path the R statistical environment. MAKE SURE TO INSTALL the "randomForest" and "RobustRankAggreg" package!!!
 RCOMMAND = "/usr/bin/R"
 # Path to Tabix
 TABIX="/freeware/bioi/tabix/current/tabix"
 # Path to Bgzip (bundled with Tabix)
 BGZIP="/freeware/bioi/tabix/current/bgzip"
-# Path to Bedtools
-BEDTOOLS = "/users/sista/asifrim/bin/"
+# Path to Bedtools intersectBed
+INTERSECTBED = "/users/sista/asifrim/bin/intersectBed"
 
 
 #EXTASY FILES (leave as is if you're running a default installation)
