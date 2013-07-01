@@ -8,6 +8,10 @@ Author: Alejandro Sifrim
 Affiliation: Bioinformatics Group, Department of Electrical Engineering, University of Leuven
 Contact: alejandro.sifrim@esat.kuleuven.be
 
+What is eXtasy?
+===============
+eXtasy is a pipeline for ranking nonsynonymous single nucleotide variants given a specific phenotype. It takes into account the putative deleteriousness of the variant, haploinsufficiency predictions of the underlying gene and the similarity of the given gene to known genes in the given phenotype. 
+
 
 Getting started:
 ================
@@ -69,10 +73,23 @@ combine.rb <PRIO_1> <PRIO_2>...<PRIO_N>
 Where <PRIO_1> to <PRIO_N> are the individual extasy prioritizations _for the same input file_. This will output a file with all the extasy_scores for the individual prioritizations and the aggregate prioritization. Keep in mind that the aggregate score ranges from 0 to 1, where 0 is likely to be disease-causing and 1 unlikely to be disease-causing (in contrast with the normal eXtasy scores). This is because this is a pseudo-pvalue that represents the probability that a variant is high-ranking in all different phenotypes given the null-hypothesis of random rankings.
 
 
-What is eXtasy?
-===============
-eXtasy is a pipeline for ranking nonsynonymous single nucleotide variants given a specific phenotype. It takes into account the putative deleteriousness of the variant, haploinsufficiency predictions of the underlying gene and the similarity of the given gene to known genes in the given phenotype. 
+Acknowledgements
+=================
 
- 
+For contributing in the development of eXtasy:
+- Dusan Popovic
+- Leon-Charles Tranchevent
+- Amin Ardeshirdavani
+- Ryo Sakai
+- Peter Konings
+- Keren Carss
+- Jan Aerts
+- Bart De Moor
+- Yves Moreau
 
+
+Thanks to the following people for reporting  bugs/issues/remarks:
+- Luis Edgardo Leon Paredes
+- Erwin Brosens
+- Ruthi Parvari
 
