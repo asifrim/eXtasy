@@ -38,6 +38,19 @@ This will download all the necessary files and unpack all the precomputed gene p
 
 export PATH=$PATH:/path/of/folder/to/be/added/
 
+Note on installing R packages:
+------------------------------ 
+Packages can be simply installed by running the following commands in R:
+install.packages("randomForest")
+install.packages("RobustRankAggreg")
+
+If you don't have access to install packages to a global-accessible folder R will prompt to install the packages to user-accessible folder. This is fine in most cases. An alternative is pointing R to a directory to install packages by setting the appropiate environment variable:
+
+export R_LIBS="/home/extasy_user/R_libs"
+mkdir /home/extasy_user/R_libs
+
+and then run R and execute the previously mentioned install.packages(...) commands.
+
 Example eXtasy run:
 -------------------
 ./extasy.rb -i ~/data/example.vcf -g ./geneprios/res/HP_0000033_fgs.tsv 
