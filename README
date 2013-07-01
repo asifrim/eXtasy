@@ -12,8 +12,8 @@ Contact: alejandro.sifrim@esat.kuleuven.be
 Getting started:
 ================
 
-Prerequisites:
---------------
+Prerequisites (need to be PATH):
+-----------------------------------------------
 - Ruby (tested on version 1.9.1)
 - Tabix (tested on version 0.2.5)
 - Bedtools (tested on version 2.17.0)
@@ -32,11 +32,11 @@ THEN
 
 cd eXtasy
 
-CONFIGURE BY CHANGING config.rb AND THEN RUN
-
 ./install.rb
 
-This will download all the necessary files and unpack all the precomputed gene prioritizations which are needed as a second input in the next step.
+This will download all the necessary files and unpack all the precomputed gene prioritizations which are needed as a second input in the next step. This script will also check that the prerequisites are found in PATH and will generate "config.rb" pointing to all the necessary prerequisites. If a prerequisite is not found it will show an error message. To add a folder to your PATH environment variable execute the following command: 
+
+export PATH=$PATH:/path/of/folder/to/be/added/
 
 Example eXtasy run:
 -------------------
