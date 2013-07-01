@@ -11,8 +11,8 @@ else
 	puts "ERROR: R environment not found"
 	exit
 end
-# puts "#{Time.now}: Check if randomForest and RobustRankAggreg R libraries are installed, if an error is given here you have to install this by executing \'install.packages(\"randomForest\")\' in R"
-# `#{RCOMMAND} --no-save --no-restore < check_r_package.r`
+puts "#{Time.now}: Check if randomForest and RobustRankAggreg R libraries are installed, if an error is given here you have to install this by executing \'install.packages(\"randomForest\")\' in R"
+`#{RCOMMAND.chomp} --no-save --no-restore < check_r_package.r`
 if `which tabix 2>/dev/null` != ""
 	TABIX = `which tabix`
 	puts "#{Time.now}: Tabix...OK"
