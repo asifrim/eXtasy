@@ -1,35 +1,78 @@
 #!/usr/bin/env ruby
-require File.expand_path('../config.rb', __FILE__)
+#require File.expand_path('../config.rb', __FILE__)
 
 puts "#{Time.now}: Installing eXtasy:"
 
 puts "#{Time.now}: Checking requirements..."
-if File.exists?(RCOMMAND)
+if `which R 2>/dev/null` != ""
+	RCOMMAND = `which R`
 	puts "#{Time.now}: R environment...OK"
 else
 	puts "ERROR: R environment not found"
 	exit
 end
-puts "#{Time.now}: Check if randomForest and RobustRankAggreg R libraries are installed, if an error is given here you have to install this by executing \'install.packages(\"randomForest\")\' in R"
-`#{RCOMMAND} --no-save --no-restore < check_r_package.r`
-if File.exists?(TABIX)
+# puts "#{Time.now}: Check if randomForest and RobustRankAggreg R libraries are installed, if an error is given here you have to install this by executing \'install.packages(\"randomForest\")\' in R"
+# `#{RCOMMAND} --no-save --no-restore < check_r_package.r`
+if `which tabix 2>/dev/null` != ""
+	TABIX = `which tabix`
 	puts "#{Time.now}: Tabix...OK"
 else
 	puts "ERROR: Tabix not found"
 	exit
 end
-if File.exists?(BGZIP)
+if `which bgzip 2>/dev/null`
+	BGZIP = `which bgzip`
 	puts "#{Time.now}: Bgzip...OK"
 else
 	puts "ERROR: Bgzip not found"
 	exit
 end
-if File.exists?(BEDTOOLS+"/intersectBed")
-	puts "#{Time.now}: Bedtools...OK"
+if `which intersectBed 2>/dev/null`
+	INTERSECTBED = `which intersectBed`
+	puts "#{Time.now}: Bedtools intersectBed...OK"
 else
-	puts "ERROR: Bedtools not found"
+	puts "ERROR: Bedtools intersectBed not found"
 	exit
 end
+
+file = File.open(File.expand_path('../config.rb', __FILE__),'w')
+file.puts <<-eos
+############################################################################################
+#
+# CONFIGURATION FILE
+#
+############################################################################################
+
+
+
+#PREREQUISITES
+##############
+
+#Path the R statistical environment. MAKE SURE TO INSTALL the "randomForest" and "RobustRankAggreg" package!!!
+RCOMMAND = "#{RCOMMAND.chomp}"
+# Path to Tabix
+TABIX="#{TABIX.chomp}"
+# Path to Bgzip (bundled with Tabix)
+BGZIP="#{BGZIP.chomp}"
+# Path to Bedtools intersectBed
+INTERSECTBED = "#{INTERSECTBED.chomp}"
+
+
+#EXTASY FILES (leave as is if you're running a default installation)
+####################################################################
+
+# Location of the bed file containing all missense positions in variant annotation file
+POSITIONSFILE = File.expand_path('../input/positions.bed',__FILE__)
+# Location of variant_annotation_file.extasy.gz
+VARIANTSFILE = File.expand_path('../input/variant_annotation_file.extasy.gz', __FILE__)
+# Location of genes.extasy
+GENESFILE = File.expand_path('../input/genes.extasy',__FILE__)
+
+#Locations of random forest models
+COMPLETEMODEL = File.expand_path('../model/balanced_complete.model', __FILE__)
+INCOMPLETEMODEL = File.expand_path('../model/balanced_incomplete.model', __FILE__)
+eos
+file.close
 
 puts "#{Time.now}: Downloading input files..."
 
