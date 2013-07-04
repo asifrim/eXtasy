@@ -1,6 +1,6 @@
 class Endeavour
 	def self.append_gene_prioritizations(annotated_file,geneprio_file)
-		puts "#{Time.now}: Appending Gene prioritization data..."
+		puts "#{Time.now}: Appending gene prioritization data..."
 		genehash= self.create_gene_translation_table(GENESFILE)
 		gp_hash = self.gp_to_hash(geneprio_file)
 		afile = File.open(annotated_file)
