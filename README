@@ -53,24 +53,45 @@ If you don't have access to install packages to a global-accessible folder R wil
 export R_LIBS="/home/extasy_user/R_libs"
 mkdir /home/extasy_user/R_libs
 
-and then run R and execute the previously mentioned install.packages(...) commands.
+and then run R and execute the previously mentioned install.packages(...) commands.pwd
+
 
 Example eXtasy run:
 -------------------
+
 ./extasy.rb -i ~/data/example.vcf -g ./geneprios/res/HP_0000033_fgs.tsv 
 
 The -i option takes as an argument the path to the vcf-file with the variants that you want to prioritize.
 The -g option takes an Endeavour gene prioritization file which can be found in the geneprios/res/ folder. A list of all precomputed phenotypes to choose from is available on the website (http://homes.esat.kuleuven.be/~bioiuser/eXtasy/current/hpo_terms.tsv). In upcoming versions custom gene prioritization based on a user-defined group of genes will be added.
 
+For running several prioritizations one can also provide a comma-separated  list of gene prioritization files. This will only run the preprocessing steps once, greatly decreasing the computation time. By giving this command the -c flag it will also automatically run the combine.rb script to combine the individual prioritizations into one global score. For example:
+
+./extasy.rb -i ~/data/example.vcf -g ./geneprios/res/HP_0000033_fgs.tsv,./geneprios/res/HP_0000010_fgs.tsv -c
+
+If you don't want to run different prioritizations for a different phenotypes in one go you can tell eXtasy to keep the intermediate files to speed up future prioritizations this is done with the -k and -r flags (-k for keeping the intermediate files, and -r for resuming from intermediate files). For example, the previous command could be done as follows:
+
+./extasy.rb -i ~/data/example.vcf -g ./geneprios/res/HP_0000033_fgs.tsv -k
+./extasy.rb -i ~/data/example.vcf -g ./geneprios/res/HP_0000010_fgs.tsv -r
+./combine.rb ~/data/example_-_HP_0000033_fgs.extasy ~/data/example_-_HP_0000010_fgs.extasy
+
+eXtasy automatically names the output like <vcf_filename>_-_<hpo_term>_fgs.extasy, with the -p option you can specify another prefix to name the output files so that the output files
+are named <prefix>_-_<hpo_id>_fgs.extasy, in the case several files are given in the -g option all the prioritizations (and combined output file) will be renamed with the prefix.
+
+The -z option compresses the output file(s) using gzip.
+
+For an overview of all the available options you can run:
+
+./extasy.rb --help OR ./extasy.rb -h OR ./extasy.rb
+
 The output can be found in the same directory as the input vcf file. It will contain two eXtasy scores and all the features used to compute these scores. The eXtasy scores can be found in the last two columns. If no missing values were present for that file the complete random forest model was able to run and will return a score. If missing values were present a less complete model was run, omitting haploinsufficiency scores (as this is the most missing feature) and replacing any further missing values with the median of that feature. The complete model outperforms the imputed model in most cases. 
  
-Combining different prioritizations:
-------------------------------------
-In some cases you might want to combine different prioritizations (e.g. when dealing with different phenotypes). This can be achieved by using Order Statistics (Aerts et al. 2006, Stuart et al. 2006). To compute these order statistics based aggregate rankings you can run the following command:
+Combining different prioritizations (experimental!):
+---------------------------------------------------
+In some cases you might want to combine different prioritizations (e.g. when dealing with different phenotypes). This can be achieved by taking the maximum score for all the phenotypes (as reported in the eXtasy manuscript) or using Order Statistics (Aerts et al. 2006, Stuart et al. 2006). To compute these  aggregate scores you can run the following command:
 
 ./combine.rb <PRIO_1> <PRIO_2>...<PRIO_N>
 
-Where <PRIO_1> to <PRIO_N> are the individual extasy prioritizations _for the same input file_. This will output a file with all the extasy_scores for the individual prioritizations and the aggregate prioritization. Keep in mind that the aggregate score ranges from 0 to 1, where 0 is likely to be disease-causing and 1 unlikely to be disease-causing (in contrast with the normal eXtasy scores). This is because this is a pseudo-pvalue that represents the probability that a variant is high-ranking in all different phenotypes given the null-hypothesis of random rankings.
+Where <PRIO_1> to <PRIO_N> are the individual extasy prioritizations _for the same input file_. This will output a file with all the extasy_scores for the individual prioritizations and the aggregate scores (max and order statistics). Keep in mind that the order statistics aggregate score ranges from 0 to 1, where 0 is likely to be disease-causing and 1 unlikely to be disease-causing (in contrast with the normal eXtasy scores). This is because this is a pseudo-pvalue that represents the probability that a variant is high-ranking in all different phenotypes given the null-hypothesis of random rankings.
 
 
 Acknowledgements
