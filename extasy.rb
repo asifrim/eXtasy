@@ -41,6 +41,7 @@ options.geneprio_files.split(",").each do |geneprio_file|
 	extasy_input_file = Endeavour.append_gene_prioritizations(annotated_file, geneprio_file)
 	extasy_input_files << extasy_input_file
 	extasy_output_file = Extasy.run_extasy(extasy_input_file)
+	File.delete(extasy_input_file)
 	prioname = File.basename(geneprio_file).split(".")[0]
 	if options.prefix == nil
 		newfilename = "#{options.vcf_file.gsub(/\.vcf$/,"")}_-_#{prioname}.extasy"
@@ -60,7 +61,6 @@ unless options.keep == true || options.resume == true
 File.delete(sorted_file)
 File.delete(matches_file)
 File.delete(annotated_file)
-extasy_input_files.each{|x| File.delete(x)}
 puts "#{Time.now}: Intermediate files deleted..."
 end
 
