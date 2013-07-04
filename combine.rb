@@ -50,15 +50,17 @@ end
 
 combinefileheader = combinefile.gets.chomp.split("\t")
 combinefileheader = combinefileheader[5..combinefileheader.size]
-outputfile.puts("#{varheader.join("\t")}\t#{combinefileheader.join("\t")}\textasy_combined")
+outputfile.puts("#{varheader.join("\t")}\t#{combinefileheader.join("\t")}\textasy_combined_max\textasy_combined_order_statistics")
 outputarray = []
 while line = combinefile.gets
 	data = line.chomp.split("\t")
+	maxscore =  data[5..data.size].map{|x| x.to_f}.max
 	varinf = variantinfo[data[4]]
 	combscore = combined_scores[data[4]]
 	res = []
 	res.concat(varinf)
 	res.concat(data[5..data.size])
+	res.concat([maxscore])
 	res.concat([combscore])
 	outputarray << res
 end
