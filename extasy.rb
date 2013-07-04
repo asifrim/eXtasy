@@ -45,7 +45,7 @@ options.geneprio_files.split(",").each do |geneprio_file|
 	if options.prefix == nil
 		newfilename = "#{options.vcf_file.gsub(/\.vcf$/,"")}_-_#{prioname}.extasy"
 	else
-		newfilename = "#{options.prefix}_-_#{prioname}.extasy"
+		newfilename = "#{File.dirname(options.vcf_file)}/#{options.prefix}_-_#{prioname}.extasy"
 	end
 	newfilenames << newfilename
     File.rename("#{options.vcf_file}.sorted.matches.annotated.extasy_input.extasy_output",newfilename)
@@ -69,9 +69,9 @@ end
 if options.zip == true
 	puts "#{Time.now}: Compressing the outputfile"
 	if options.prefix == nil
-		`tar -pczf #{options.vcf_file.gsub(/\.vcf$/,"")}.extasy.tar.gz  #{newfilenames.join(" ")}`
+		`tar -pczf #{options.vcf_file.gsub(/\.vcf$/,"")}.extasy.tar.gz  #{newfilenames.join(" ")} 2>&1`
 	else
-		`tar -pczf #{options.prefix}.extasy.tar.gz  #{newfilenames.join(" ")}`
+		`tar -pczf #{File.dirname(options.vcf_file)}/#{options.prefix}.extasy.tar.gz -C #{File.dirname(options.vcf_file)} #{newfilenames.map{|x| File.basename(x)}.join(" ")} 2>&1`
 	end
 end
 
