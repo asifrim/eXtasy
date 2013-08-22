@@ -42,7 +42,8 @@ This will download all the necessary files and unpack all the precomputed gene p
 
 export PATH=$PATH:/path/of/folder/to/be/added/
 
-The necessary data files are by default installed in a directory relative the config.rb file. Due to size considerations some users might want to  move them to  other  dlocationas
+The necessary data files are by default installed in a directory relative the config.rb file.
+Due to size considerations some users might want to  move them to  other  locations. This  can simply be achieved by moving the files and pointing config.rb to the correct directories.
 
 Note on installing R packages:
 ------------------------------ 
