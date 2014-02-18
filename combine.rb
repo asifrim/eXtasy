@@ -26,7 +26,7 @@ end
 
 puts "#{Time.now}: Applying order statistics for combining phenotypes..."
 
-`#{RCOMMAND} --no-save --no-restore --args #{combinefilename} < order_statistics.r`
+`#{RCOMMAND} --no-save --no-restore --args #{combinefilename} < #{File.expand_path('../order_statistics.r', __FILE__)}`
 
 file = File.open("#{combinefilename}.order_statistics_output")
 combinefile = File.open("#{combinefilename}")
